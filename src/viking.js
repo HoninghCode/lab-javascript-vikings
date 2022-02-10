@@ -35,9 +35,9 @@ class Viking extends Soldier {
 
 // Saxon
 class Saxon extends Soldier {
-  constructor(health, strength) {
-    super(health, strength);
-  }
+  // constructor(health, strength) {
+  //   super(health, strength);
+  // }
 
   receiveDamage(damage) {
     this.health -= damage;
@@ -65,14 +65,34 @@ class War {
     this.saxonArmy[0].strength -= this.saxonArmy[0].receiveDamage(
       this.vikingArmy[0].strength
     );
-    // if () {
-     // .pop
-    // } else {
-
-    // }
+    if (this.saxonArmy[0].health <= 0) {
+      this.saxonArmy.pop();
+      return `A Saxon has died in combat`;
+      // Saxon.receiveDamage(this.vikingArmy[0].strength)
+      // console.log(Saxon.receiveDamage);
+    }
   }
-  saxonAttack() {}
-  showStatus() {}
+  saxonAttack() {
+    this.vikingArmy[0].strength -= this.vikingArmy[0].receiveDamage(
+      this.saxonArmy[0].strength
+    );
+    if (this.vikingArmy[0].health <= 0) {
+      this.vikingArmy.pop();
+      return `random`;
+      // console.log( `${this.saxonArmy[0].strength}`)
+      // console.log(`${Viking.name}`)
+    }
+    return `Harald has received ${this.saxonArmy[0].strength} points of damage`;
+  }
+  showStatus() {
+    if (this.saxonArmy.length === 0) {
+      return `Vikings have won the war of the century!`;
+    } else if (this.vikingArmy.length === 0) {
+      return `Saxons have fought for their lives and survived another day...`;
+    } else {
+      return `Vikings and Saxons are still in the thick of battle.`;
+    }
+  }
 }
 
 // The following is required to make unit tests work.
